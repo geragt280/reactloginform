@@ -1,25 +1,21 @@
-import logo from './logo.svg';
+import React, { useState } from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import Container from 'react-bootstrap/Container';
 import './App.css';
+import SignInForm from './components/SignInForm';
+import SignUpForm from './components/SignUpForm';
 
-function App() {
+export default function App() {
+
+  const [changeform, setchangeform] = useState('login')
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='App'>
+      <Container className='d-flex justify-content-center align-items-center vh-100 main-container'>
+        <div>
+          {changeform === 'login'?<SignInForm changeform={setchangeform} /> : <SignUpForm changeform={setchangeform} />}
+        </div>
+      </Container>
     </div>
-  );
+  )
 }
-
-export default App;
