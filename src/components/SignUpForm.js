@@ -19,6 +19,10 @@ export default function SignUpForm({changeform}) {
               {/* <Form.Label>Password</Form.Label> */}
               <Form.Control type="password" placeholder="Password" />
             </Form.Group>
+            <Form.Group className="mb-3 m-5 mt-1" controlId="formBasicRePassword">
+              {/* <Form.Label>Password</Form.Label> */}
+              <Form.Control type="password" placeholder="Confirm Password" />
+            </Form.Group>
             <Form.Group className="mb-3 m-5 mt-1" controlId="formBasicCheckbox">
               <Form.Check type="checkbox" label="Check me out" />
             </Form.Group>
