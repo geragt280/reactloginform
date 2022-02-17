@@ -1,15 +1,38 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import User from './User';
 
 export default function SignInForm({changeform}) {
+
+
+  const [useremail, setuseremail] = useState('');
+  const [userpassword, setuserpassword] = useState('');
+  
+
+  const user = new User();
+  const login = async () => {
+      console.log('credentials got:',useremail, userpassword);
+
+      await user.loginUser(useremail, userpassword);
+  }
+
+  const OnEmailChange = (event) => {
+    setuseremail(event.targer.value);
+  }
+
+  const OnPasswordChange = (event) => {
+    setuserpassword(event.targer.value);
+  }
+
   return (
     <div>
+    
         <Form className='p-5 form-box'>
             <h3 className='m-1 mb-4'>Login Existing Account</h3>
             <Form.Group className="mb-3 m-5 mt-3" controlId="formBasicEmail">
               {/* <Form.Label>Email address</Form.Label> */}
-              <Form.Control type="email" placeholder="Enter email" />
+              <Form.Control type="email" placeholder="Enter email" onChange={e => setuseremail(e.target.value)} value={useremail} />
               {/* <Form.Text className="text-muted">
                 We'll never share your email with anyone else.
               </Form.Text> */}
@@ -17,18 +40,19 @@ export default function SignInForm({changeform}) {
 
             <Form.Group className="mb-3 m-5 mt-1" controlId="formBasicPassword">
               {/* <Form.Label>Password</Form.Label> */}
-              <Form.Control type="password" placeholder="Password" />
+              <Form.Control type="password" placeholder="Password" onChange={e => setuserpassword(e.target.value)} value={userpassword}/>
             </Form.Group>
             <Form.Group className="mb-3 m-5 mt-1" controlId="formBasicCheckbox">
-              <Form.Check type="checkbox" label="Check me out" />
+              <Form.Check type="checkbox" label="Remember password" />
             </Form.Group>
             <Form.Group className='mb-3 m5 mt-4 form-buttons'>
-              <Button className='m-2 mb-0 mt-0' variant="success" type="submit">
+              <Button className='m-2 mb-0 mt-0' variant="success" onClick={() => login()} >
                 Login
               </Button>
               <Button className='m-2 mb-0 mt-0' variant="light" onClick={() => changeform('signup')}>
                 Create New Account
               </Button>
+              
             </Form.Group>
           </Form>
     </div>

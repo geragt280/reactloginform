@@ -13,5 +13,11 @@
 .form-buttons{
   text-align: center;
 }
+.nav-bar{
+  display: inline-flex;
+}
+.link{
+  color: gold;
+}
 
 
