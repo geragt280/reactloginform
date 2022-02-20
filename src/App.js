@@ -6,16 +6,15 @@ import {
   Routes,
   Route,
   Link,
-  useRouteMatch,
-  useParams
 } from "react-router-dom";
 import AuthenticationScreen from './screens/AuthenticationScreen';
 import HomeScreen from './screens/HomeScreen';
-
+import { useSelector } from 'react-redux';
 
 export default function App() {
 
-  const [tempLoginState, settempLoginState] = useState('loggedout')
+  const [tempLoginState, settempLoginState] = useState('loggedout');
+  const loginstatus = useSelector(state => state.auth);
 
   function About() {
     return <h2 className='d-flex justify-content-center align-items-center vh-100 main-container'>About</h2>;
@@ -27,15 +26,15 @@ export default function App() {
       <Router>
         <div>
           <ul className='m-1 p-2 text-uppercase list-unstyled nav-bar'>
-            <li>
+            {loginstatus==='loggedout' ?<li>
               <Link className='p-2 text-decoration-none link' to="/">Login</Link>
-            </li>
-            <li>
+            </li> : null}
+            {loginstatus==='login' ? <li>
               <Link className='p-2 text-decoration-none link' to="/users">Home</Link>
-            </li>
-            <li>
+            </li> : null }
+            {loginstatus==='login' ?<li>
               <Link className='p-2 text-decoration-none link' to="/about">About</Link>
-            </li>
+            </li> : null }
           </ul>
 
           <Routes>

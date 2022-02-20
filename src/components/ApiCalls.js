@@ -21,10 +21,12 @@ export default class ApiCalls{
         
     }
 
-    postReqAxios(address, body){
-        axios.post(this.uriStart + address, body)
+    async postReqAxios(address, body, callback){
+        await axios.post(this.uriStart + address, body)
             .then(function (response) {
                 console.log('api login respose:',response);
+                // return response.data;
+                callback(response);
             })
             .catch(function (error) {
                 if (error.response) {

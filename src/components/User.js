@@ -8,16 +8,20 @@ export default class User{
 
     api = new ApiCalls();
 
+    items = [];
 
-    async loginUser(useremail, password, callback){
+    async loginUser(useremail, password, setUserToken){
         this.email = useremail;
         this.password = password;
         const body = {
             email: this.email,
             password: this.password,
-        }
-        const item = await this.api.postReqAxios("/api/login", body);
-        return item;
+        };
+        this.api.postReqAxios("/api/login", body, function(response) {
+            console.log(response.data);
+            setUserToken(response.data);
+          })
+        // console.log('Array', items);
     }
 
 }

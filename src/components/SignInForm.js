@@ -2,19 +2,21 @@ import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import User from './User';
+import {useDispatch} from 'react-redux';
+import { loginAction, addUserAction } from '../actions/authActions';
 
-export default function SignInForm({changeform}) {
+export default function SignInForm({changeform, setuserToken}) {
 
-
+  const dispach = useDispatch();
   const [useremail, setuseremail] = useState('');
-  const [userpassword, setuserpassword] = useState('');
-  
+  const [userpassword, setuserpassword] = useState('');  
 
   const user = new User();
   const login = async () => {
       console.log('credentials got:',useremail, userpassword);
-
-      await user.loginUser(useremail, userpassword);
+      dispach(loginAction());
+      dispach(addUserAction('user'))
+      await user.loginUser(useremail, userpassword, setuserToken);
   }
 
   const OnEmailChange = (event) => {
