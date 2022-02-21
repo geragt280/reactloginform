@@ -21,24 +21,38 @@ export default class ApiCalls{
         
     }
 
-    async postReqAxios(address, body, callback){
-        await axios.post(this.uriStart + address, body)
-            .then(function (response) {
-                console.log('api login respose:',response);
-                // return response.data;
-                callback(response);
-            })
-            .catch(function (error) {
-                if (error.response) {
-                    // console.log(error.response.data.error);
-                    // console.log(error.response.status);
-                    // console.log(error.response.headers);
-                    return {
-                        message: error.response.data.error,
-                        status: error.response.status
-                    }
-                  }
-            });
+    async postReqAxios(address, body){
+        try {
+            let response = await axios.post(this.uriStart + address, body);
+            return {
+                message: 'login successful',
+                status: response.status,
+                data : response.data,
+            }
+        }
+        catch(e) {
+           return {
+                message: e.response.data.error,
+                status: e.response.status
+            }
+        }
+
+            // .then(function (response) {
+            //     console.log('api login respose:',response);
+            //     // return response.data;
+            //     callback(response);
+            // })
+            // .catch(function (error) {
+            //     if (error.response) {
+            //         // console.log(error.response.data.error);
+            //         // console.log(error.response.status);
+            //         // console.log(error.response.headers);
+            //         return {
+            //             message: error.response.data.error,
+            //             status: error.response.status
+            //         }
+            //       }
+            // });
     }
 
     

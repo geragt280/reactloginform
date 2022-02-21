@@ -3,7 +3,7 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import User from './User';
 import {useDispatch} from 'react-redux';
-import { loginAction, addUserAction } from '../actions/authActions';
+import { loginAction, getUserToken } from '../actions/authActions';
 
 export default function SignInForm({changeform, setuserToken}) {
 
@@ -14,17 +14,11 @@ export default function SignInForm({changeform, setuserToken}) {
   const user = new User();
   const login = async () => {
       console.log('credentials got:',useremail, userpassword);
-      dispach(loginAction());
-      dispach(addUserAction('user'))
-      await user.loginUser(useremail, userpassword, setuserToken);
-  }
-
-  const OnEmailChange = (event) => {
-    setuseremail(event.targer.value);
-  }
-
-  const OnPasswordChange = (event) => {
-    setuserpassword(event.targer.value);
+      const response = await user.loginUser(useremail, userpassword, setuserToken);
+      if (response) {
+        dispach(loginAction());
+        dispach(getUserToken(useremail));
+      }
   }
 
   return (

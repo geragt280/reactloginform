@@ -17,11 +17,20 @@ export default class User{
             email: this.email,
             password: this.password,
         };
-        this.api.postReqAxios("/api/login", body, function(response) {
-            console.log(response.data);
+        const response = await this.api.postReqAxios("/api/login", body);
+        console.log(response);
+        if (response.status == 400) {
+            console.log('Login error:', response);
+        }
+        else{
             setUserToken(response.data);
-          })
+            return response;
+        }
         // console.log('Array', items);
+        // function(response) {
+        //     console.log(response.data);
+        //     setUserToken(response.data);
+        //   }
     }
 
 }

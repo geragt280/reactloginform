@@ -17,7 +17,10 @@ export default function App() {
   const loginstatus = useSelector(state => state.auth);
 
   function About() {
-    return <h2 className='d-flex justify-content-center align-items-center vh-100 main-container'>About</h2>;
+    return <div className='d-flex justify-content-center align-items-center vh-100 main-container'>
+        <h2 >About</h2>
+        <p>Made By Muhammad Bilal Khan</p>
+    </div>;
   }
 
 

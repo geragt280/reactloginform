@@ -1,11 +1,18 @@
-export const loginAction = () => {
+export const loginAction = (user) => {
     return {
         type:'LOGIN',
+        userinfo: user,
     }
 }
-export const addUserAction = (user) => {
+export const getUserToken = (user) => {
     return {
-        type: 'ADDUSERS',
-        userlist: user,
+        type: 'GETUSERTOKEN',
+        userinfo: user,
+    }
+}
+
+export const getAllUsers = () => {
+    return {
+        type: 'GETALLUSERS',
     }
 }

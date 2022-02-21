@@ -15,8 +15,14 @@ export default function AuthenticationScreen() {
   
   useEffect(() => {
     console.log('useEffect called.')
-    userToken==='' ? console.log('Login please') : navigate('/users');
-  }, [])
+    if(userToken===''){
+      console.log('if ran.');
+    }
+    else 
+    {
+      navigate("/users", { state: { name: "Bilal" } }) 
+    } 
+  }, [userToken])
 
   return (
     <div>

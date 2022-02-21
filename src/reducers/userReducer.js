@@ -1,7 +1,9 @@
 const userReducer = (state = {}, action) => {
     switch (action.type) {
-        case "ADDUSERS":
-            state = action.userlist;
+        case "GETUSERTOKEN":
+            state = {
+                username:action.userinfo,
+            }
             return state;    
         default:
             return state;
